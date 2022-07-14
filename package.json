@@ -1,0 +1,15 @@
+{
+  "name": "gerardesteve",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gerardest/cascader": "^1.1.0",
+    "plain-draggable": "^2.5.14"
+  }
+}

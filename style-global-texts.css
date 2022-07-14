@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Nunito';
+    font-weight: 200 900;
+    font-style: normal;
+    font-stretch: normal;
+    src: url(/fonts/Nunito-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: 'Inconsolata';
+    font-weight: 200 900;
+    font-style: normal;
+    font-stretch: normal;
+    src: url(/fonts/Inconsolata-VariableFont_wdth.ttf);
+}

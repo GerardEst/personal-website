@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+    
+    <script type="module" src="/main.js"></script>
+    <script type="module" src="/components/project-card.js"></script>
+    <script src="./node_modules/plain-draggable/plain-draggable.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div id="algorithm" class="tag" dragger style="left: 10%; top: 30%">
+            algorithm
+        </div>
+        <div id="database" class="tag colliding" dragger style="left: 80%; top: 45%">database</div>
+        <div id="network" class="tag" dragger style="left: 35%; top: 80%">network</div>
+        
+            <h1>Gerard Esteve</h1>
+            <h2>Front-end developer</h2>
+    </header>
+
+    <!--Fer que cascader no necessiti per força id-->
+    <section id="projectlist" class="projectlist">
+        <project-card>
+            <h1 slot="title">Marco</h1>
+            <p slot="description">Converts json to text adventure, test, etc</p>
+            <a href="https://github.com/GerardEst/marco" slot="link">Github</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">Polo</h1>
+            <p slot="description">Create text-adventures with nodes</p>
+            <a href="#" slot="link">Website</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">Cascader</h1>
+            <p slot="description">Simple responsive masonry (used in this page)<br>Check here how this is higher than the other components and everything adapts<br><br><br></p>
+            <a target="_blank" href="https://github.com/GerardEst/cascader" slot="link">Github</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">broken-things</h1>
+            <p slot="description">Check broken things in a page</p>
+            <a target="_blank" href="https://github.com/GerardEst/broken-things" slot="link">Github</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">lootcodes</h1>
+            <p slot="description">Adventures with barcodes!</p>
+            <a target="_blank" href="https://github.com/GerardEst/lootcodes" slot="link">Github</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">quber</h1>
+            <p slot="description">Velocity game</p>
+            <a target="_blank" href="https://github.com/GerardEst/quber" slot="link">Github</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">meshview</h1>
+            <p slot="description">3D visor with tools</p>
+            <a target="_blank" href="https://github.com/GerardEst/mesh" slot="link">Github</a>
+        </project-card>
+    </section>
+</body>
+</html>
