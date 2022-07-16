@@ -8,7 +8,6 @@ cascade('#projectlist', {
 })
 
 // LA API de drag drop es una merda. Dragger és millor
-
 dragger([...document.querySelectorAll('[dragger]')])
 
 dragger.onCollide = ev => {
@@ -19,6 +18,16 @@ dragger.onCollide = ev => {
 dragger.endCollide = ev => {
     console.log(ev.collider.id + ' stopped colliding with '+ ev.collided.id)
     ev.collided.classList.remove('collided')
+}
+
+dragger.stopDrag = ev => {
+    console.log("Stopped dragging", ev)
+}
+dragger.startDrag = ev => {
+    console.log("Started dragging", ev)
+}
+dragger.drag = ev => {
+    console.log("Dragging", ev)
 }
 
 

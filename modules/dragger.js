@@ -55,7 +55,10 @@ export function dragger(elements){
 
         document.addEventListener('mouseup', ev => {
             const draggedElement = document.querySelector('[dragging]')
-            if(draggedElement) stopDragging(draggedElement)
+            if(draggedElement) stopDragging(draggedElement, {
+                x: ev.clientX,
+                y: ev.clientY
+            })
         })
     }
 }
@@ -65,6 +68,8 @@ function startDrag(element, {x,y}){
     element.style.zIndex = 1000
     element.setAttribute('shiftX', x - element.getBoundingClientRect().left)
     element.setAttribute('shiftY', y - element.getBoundingClientRect().top)
+
+    dragger.startDrag({element,x,y})
 }
 
 function move(moving, {x,y}){    
@@ -73,6 +78,12 @@ function move(moving, {x,y}){
 
     const notYou = draggables.filter( drag => {
         return drag.id !== moving.id 
+    })
+
+    dragger.drag({
+        element: moving,
+        x,
+        y
     })
 
     // Detectar si está sobre d'un altre element
@@ -111,7 +122,9 @@ function move(moving, {x,y}){
     }
 }
 
-function stopDragging(element){
+function stopDragging(element, {x,y}){
     element.style.zIndex = 'unset'
     element.removeAttribute('dragging')
+    
+    dragger.stopDrag({element,x,y})
 }
