@@ -8,42 +8,8 @@ export function dragger(elements){
     draggables = elements
 
     for(let element of draggables){
-        element.style.userSelect = 'none'
-        element.style.position = 'absolute'
-        element.style.margin = 0
 
-        // Prevent conflicts when dragging browser predefined draggable elements
-        element.ondragstart = () => false;
-
-
-        /* Touch events */
-
-        element.addEventListener('touchstart', ev => {
-            startDrag(ev.target, {
-                x: ev.touches[0].clientX,
-                y: ev.touches[0].clientY
-            })
-        })
-        element.addEventListener('touchmove', ev => {
-            const draggedElement = ev.target
-            if(draggedElement) move(draggedElement, {
-                x: ev.touches[0].clientX,
-                y: ev.touches[0].clientY
-            })
-        })
-        document.addEventListener('touchend', ev => {
-            stopDragging(ev.target)
-        })
-
-
-        /* Mouse events */
-
-        element.addEventListener('mousedown', ev => {
-            startDrag(element, {
-                x: ev.clientX,
-                y: ev.clientY
-            })
-        })
+        adjustElement(element)
 
         document.addEventListener('mousemove', ev => {
             const draggedElement = document.querySelector('[dragging]')
@@ -61,6 +27,50 @@ export function dragger(elements){
             })
         })
     }
+    
+}
+
+export function add(element){
+    draggables.push(element)
+    adjustElement(element)
+}
+
+function adjustElement(element){
+    element.style.userSelect = 'none'
+    element.style.position = 'absolute'
+    element.style.margin = 0
+
+    // Prevent conflicts when dragging browser predefined draggable elements
+    element.ondragstart = () => false;
+
+    /* Touch events */
+
+    element.addEventListener('touchstart', ev => {
+        startDrag(ev.target, {
+            x: ev.touches[0].clientX,
+            y: ev.touches[0].clientY
+        })
+    })
+    element.addEventListener('touchmove', ev => {
+        const draggedElement = ev.target
+        if(draggedElement) move(draggedElement, {
+            x: ev.touches[0].clientX,
+            y: ev.touches[0].clientY
+        })
+    })
+    document.addEventListener('touchend', ev => {
+        stopDragging(ev.target)
+    })
+
+
+    /* Mouse events */
+
+    element.addEventListener('mousedown', ev => {
+        startDrag(element, {
+            x: ev.clientX,
+            y: ev.clientY
+        })
+    })
 }
 
 function startDrag(element, {x,y}){
@@ -69,7 +79,7 @@ function startDrag(element, {x,y}){
     element.setAttribute('shiftX', x - element.getBoundingClientRect().left)
     element.setAttribute('shiftY', y - element.getBoundingClientRect().top)
 
-    dragger.startDrag({element,x,y})
+    if(dragger.startDrag) dragger.startDrag({element,x,y})
 }
 
 function move(moving, {x,y}){    
@@ -80,7 +90,7 @@ function move(moving, {x,y}){
         return drag.id !== moving.id 
     })
 
-    dragger.drag({
+    if(dragger.drag) dragger.drag({
         element: moving,
         x,
         y
@@ -103,7 +113,7 @@ function move(moving, {x,y}){
         if(movingEl_x + movingEl_width >= el_x && movingEl_x <= el_x + el_width && movingEl_y + movingEl_height >= el_y && movingEl_y <= el_y + el_height){
             if(!el.hasAttribute('colliding')){ 
                 el.setAttribute('colliding','')
-                dragger.onCollide({ // No sé perquè això funciona
+                if(dragger.onCollide) dragger.onCollide({ // No sé perquè això funciona
                         collider: moving, 
                         collided: el
                     })
@@ -113,7 +123,7 @@ function move(moving, {x,y}){
         }else{
             if(el.hasAttribute('colliding')){
                 el.removeAttribute('colliding')
-                dragger.endCollide({
+                if(dragger.endCollide) dragger.endCollide({
                     collider: moving, 
                     collided: el
                 })
@@ -126,5 +136,5 @@ function stopDragging(element, {x,y}){
     element.style.zIndex = 'unset'
     element.removeAttribute('dragging')
     
-    dragger.stopDrag({element,x,y})
+    if(dragger.stopDrag) dragger.stopDrag({element,x,y})
 }
