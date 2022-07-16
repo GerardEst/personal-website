@@ -9,16 +9,16 @@
     
     <script type="module" src="/main.js"></script>
     <script type="module" src="/components/project-card.js"></script>
+    <script type="module" src="/components/alchemy-tag.js"></script>
+    
     <script src="./node_modules/plain-draggable/plain-draggable.min.js"></script>
 </head>
 <body>
 
     <header>
-        <div id="algorithm" class="tag" dragger style="left: 10%; top: 30%">
-            algorithm
-        </div>
-        <div id="database" class="tag colliding" dragger style="left: 80%; top: 45%">database</div>
-        <div id="network" class="tag" dragger style="left: 35%; top: 80%">network</div>
+        <alchemy-tag id="algorithm" label="algorithm" dragger style="left: 10%; top: 30%"></alchemy-tag>
+        <alchemy-tag id="database" label="database" dragger style="left: 80%; top: 45%"></alchemy-tag>
+        <alchemy-tag id="network" label="network" dragger style="left: 35%; top: 80%"></alchemy-tag>
         
             <h1>Gerard Esteve</h1>
             <h2>Front-end developer</h2>

@@ -59,11 +59,10 @@ function checkPair(collider, collided, mousePos){
 }
 
 function createElement(element, pos){
-    const tag = document.createElement('div')
+    const tag = document.createElement('alchemy-tag')
     tag.id = element
-    tag.className = 'tag'
-    tag.setAttribute('dragger','')
-    tag.textContent = element
+    tag.setAttribute('dragger', '')
+    tag.setAttribute('label', element)
     
     tag.style.top = pos.y+'px'
     tag.style.left = pos.x+'px'

@@ -59,30 +59,3 @@ header{
     width: 100%;
     max-width: 900px;
 }
-
-
-
-.tag{
-    font-family: 'Inconsolata';
-    padding: 1rem;
-    background-color: var(--sec-color);
-    cursor: grab;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    border: 3px solid var(--sec-color);
-}
-.tag:hover{
-    border-color: var(--main-color)
-}
-.tag[colliding]{
-    border: 3px dashed var(--accent-color);
-    animation-name: border-spin;
-}
-@keyframes border-spin {
-    from{
-        border-style: dashed;
-    }
-    to{
-        
-    }
-}
