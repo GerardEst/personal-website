@@ -65,6 +65,9 @@ function createElement(element, pos){
     tag.setAttribute('dragger','')
     tag.textContent = element
     
+    tag.style.top = pos.y+'px'
+    tag.style.left = pos.x+'px'
+
     document.querySelector('header').appendChild(tag)
     
     add(tag)
