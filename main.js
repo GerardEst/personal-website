@@ -13,25 +13,29 @@ dragger([...document.querySelectorAll('[dragger]')])
 let elements_colliding = []
 
 dragger.onCollide = ev => {
-    console.log(ev.collider.id + ' collided with '+ ev.collided.id)
-    //checkPair(ev.collider, ev.collided)
+    console.log('Colliding elements: ', ev.collided, ev.collider)
     
     elements_colliding.push(ev.collider)
     elements_colliding.push(ev.collided)
 }
 
 dragger.endCollide = ev => {
-    console.log(ev.collider.id + ' stopped colliding with '+ ev.collided.id)
+    console.log('End colliding elements: ', ev.collided, ev.collider)
     ev.collided.classList.remove('collided')
     
     elements_colliding = []
 }
 
+// Duplicar amb shift
+dragger.startDrag = ev => {
+    if(ev.shift){
+        createElement(ev.element.getAttribute('label'), {x:ev.x, y:ev.y})
+    }
+    console.log("Started dragging", ev)
+}
+
 /*dragger.stopDrag = ev => {
     console.log("Stopped dragging", ev)
-}
-dragger.startDrag = ev => {
-    console.log("Started dragging", ev)
 }
 dragger.drag = ev => {
     console.log("Dragging", ev)
@@ -43,24 +47,36 @@ dragger.stopDrag = ev => {
 
 function checkPair(collider, collided, mousePos){
 
+    const label_collider = collider.getAttribute('label')
+    const label_collided = collided.getAttribute('label')
+
     collided.classList.add('collided')
+
     const pair = pairs.find( pair => {
-        if(pair.parents.indexOf(collider.id) >= 0 && pair.parents.indexOf(collided.id) >= 0){
-            return pair.child
-        }
+        return pair.parents[0] === label_collider && pair.parents[1] === label_collided
     })
+
     if(pair) {
         console.log('Will create child ', pair.child)
 
         destroyElement(collider)
         destroyElement(collided)
         createElement(pair.child, mousePos)
+        checkBadge()
+        givePoints()
     }
+}
+
+function checkBadge(){
+
+}
+
+function givePoints(){
+    console.log("10 Knowledge points")
 }
 
 function createElement(element, pos){
     const tag = document.createElement('alchemy-tag')
-    tag.id = element
     tag.setAttribute('dragger', '')
     tag.setAttribute('label', element)
     

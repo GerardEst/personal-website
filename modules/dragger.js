@@ -12,10 +12,13 @@ export function dragger(elements){
         adjustElement(element)
 
         document.addEventListener('mousemove', ev => {
+            // Detect ctrl or shift
             const draggedElement = document.querySelector('[dragging]')
             if(draggedElement) move(draggedElement, {
                 x: ev.clientX,
-                y: ev.clientY
+                y: ev.clientY,
+                shift: ev.shiftKey,
+                ctrl: ev.ctrlKey
             })
         })
 
@@ -23,7 +26,9 @@ export function dragger(elements){
             const draggedElement = document.querySelector('[dragging]')
             if(draggedElement) stopDragging(draggedElement, {
                 x: ev.clientX,
-                y: ev.clientY
+                y: ev.clientY,
+                shift: ev.shiftKey,
+                ctrl: ev.ctrlKey
             })
         })
     }
@@ -68,33 +73,29 @@ function adjustElement(element){
     element.addEventListener('mousedown', ev => {
         startDrag(element, {
             x: ev.clientX,
-            y: ev.clientY
+            y: ev.clientY,
+            shift: ev.shiftKey,
+            ctrl: ev.ctrlKey
         })
     })
 }
 
-function startDrag(element, {x,y}){
+function startDrag(element, {x,y,shift,ctrl}){
     element.setAttribute('dragging', '')
     element.style.zIndex = 1000
     element.setAttribute('shiftX', x - element.getBoundingClientRect().left)
     element.setAttribute('shiftY', y - element.getBoundingClientRect().top)
 
-    if(dragger.startDrag) dragger.startDrag({element,x,y})
+    if(dragger.startDrag) dragger.startDrag({element,x,y,shift,ctrl})
 }
 
-function move(moving, {x,y}){    
+function move(moving, {x,y,shift,ctrl}){    
     moving.style.left = x - moving.getAttribute('shiftX') + 'px'
     moving.style.top = y - moving.getAttribute('shiftY') + 'px'
 
-    const notYou = draggables.filter( drag => {
-        return drag.id !== moving.id 
-    })
+    const notYou = draggables.filter( drag => drag !== moving )
 
-    if(dragger.drag) dragger.drag({
-        element: moving,
-        x,
-        y
-    })
+    if(dragger.drag) dragger.drag({element: moving,x,y,shift,ctrl})
 
     // Detectar si está sobre d'un altre element
     for(let el of notYou){
@@ -132,9 +133,9 @@ function move(moving, {x,y}){
     }
 }
 
-function stopDragging(element, {x,y}){
+function stopDragging(element, {x,y,shift,ctrl}){
     element.style.zIndex = 'unset'
     element.removeAttribute('dragging')
     
-    if(dragger.stopDrag) dragger.stopDrag({element,x,y})
+    if(dragger.stopDrag) dragger.stopDrag({element,x,y,shift,ctrl})
 }
