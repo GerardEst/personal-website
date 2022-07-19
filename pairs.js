@@ -29,7 +29,21 @@ export const pairs = [
     {
         'parents': ['database','database'],
         'child': 'big data'
-    }
+    },
 
     // big data, www, programming, sql, http, cloud / database, algorithm, network
+
+    {
+        'parents': ['http','www'],
+        'child': ''
+    },
+
+
+
+
+    {
+        'parents': ['http','html'],
+        'child': 'website'
+    },
+
 ]
