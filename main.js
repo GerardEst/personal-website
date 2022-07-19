@@ -13,14 +13,14 @@ dragger([...document.querySelectorAll('[dragger]')])
 let elements_colliding = []
 
 dragger.onCollide = ev => {
-    console.log('Colliding elements: ', ev.collided, ev.collider)
+    //console.log('Colliding elements: ', ev.collided, ev.collider)
     
     elements_colliding.push(ev.collider)
     elements_colliding.push(ev.collided)
 }
 
 dragger.endCollide = ev => {
-    console.log('End colliding elements: ', ev.collided, ev.collider)
+    //console.log('End colliding elements: ', ev.collided, ev.collider)
     ev.collided.classList.remove('collided')
     
     elements_colliding = []
@@ -31,7 +31,7 @@ dragger.startDrag = ev => {
     if(ev.shift){
         createElement(ev.element.getAttribute('label'), {x:ev.x, y:ev.y})
     }
-    console.log("Started dragging", ev)
+    //console.log("Started dragging", ev)
 }
 
 /*dragger.stopDrag = ev => {
@@ -53,11 +53,11 @@ function checkPair(collider, collided, mousePos){
     collided.classList.add('collided')
 
     const pair = pairs.find( pair => {
-        return pair.parents[0] === label_collider && pair.parents[1] === label_collided
+        return (pair.parents[0] === label_collider && pair.parents[1] === label_collided) || (pair.parents[1] === label_collider && pair.parents[0] === label_collided)
     })
 
     if(pair) {
-        console.log('Will create child ', pair.child)
+        //console.log('Will create child ', pair.child)
 
         destroyElement(collider)
         destroyElement(collided)
