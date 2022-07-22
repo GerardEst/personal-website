@@ -1,8 +1,5 @@
 let draggables = []
 
-// El movimiento tendria que aplicarse a un transform, para que se mueva en referencia
-// a su posición inicial, que puede ser tanto en px como en %.
-// Posibilidad de tener un elemento que puede ser colisionado pero no se pueda mover
 export function dragger(elements){
 
     draggables = elements
@@ -97,10 +94,8 @@ function move(moving, {x,y,shift,ctrl}){
 
     if(dragger.drag) dragger.drag({element: moving,x,y,shift,ctrl})
 
-    // Detectar si está sobre d'un altre element
     for(let el of notYou){
         
-        // Si coincideix amb la posicio d'algun dels altres, està a sobre
         const el_x = el.getBoundingClientRect().left
         const el_y = el.getBoundingClientRect().top
         const el_width = el.getBoundingClientRect().width
@@ -114,7 +109,7 @@ function move(moving, {x,y,shift,ctrl}){
         if(movingEl_x + movingEl_width >= el_x && movingEl_x <= el_x + el_width && movingEl_y + movingEl_height >= el_y && movingEl_y <= el_y + el_height){
             if(!el.hasAttribute('colliding')){ 
                 el.setAttribute('colliding','')
-                if(dragger.onCollide) dragger.onCollide({ // No sé perquè això funciona
+                if(dragger.onCollide) dragger.onCollide({
                         collider: moving, 
                         collided: el
                     })

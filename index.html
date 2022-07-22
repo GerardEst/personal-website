@@ -10,19 +10,34 @@
     <script type="module" src="/main.js"></script>
     <script type="module" src="/components/project-card.js"></script>
     <script type="module" src="/components/alchemy-tag.js"></script>
-    
-    <script src="./node_modules/plain-draggable/plain-draggable.min.js"></script>
+
 </head>
 <body>
 
-    <header>
-        <alchemy-tag label="algorithm" dragger style="left: 10%; top: 30%"></alchemy-tag>
-        <alchemy-tag label="database" dragger style="left: 80%; top: 45%"></alchemy-tag>
-        <alchemy-tag label="network" dragger style="left: 35%; top: 80%"></alchemy-tag>
+    <div class="board">
+        <alchemy-tag label="html" dragger style="left: 10%; top: 30%"></alchemy-tag>
+        <alchemy-tag label="javascript" dragger style="left: 80%; top: 45%"></alchemy-tag>
+        <alchemy-tag label="css" dragger style="left: 35%; top: 80%"></alchemy-tag>
         
-            <h1>Gerard Esteve</h1>
-            <h2>Front-end developer</h2>
-    </header>
+        <h1>Gerard Esteve</h1>
+        <h2>Front-end developer</h2>
+
+       <div class="help" style="position: absolute; right: 0; bottom: 0">
+            <span>?</span>
+            <div class="modal">
+                <div class="desktop_instructions">
+                    <p>shift + drag -> Duplicate a tag</p>
+                    <p>spacebar -> Open discovered tags menu</p>
+                    <p>3 clicks on a tag -> Break the tag (you can break three tags per day)</p>
+                </div>
+                <div class="mobile_instructions" style="display: none;">
+                    <p>hold -> Duplicate a tag</p>
+                    <p>slide down || click anywhere -> Open discovered tags menu</p>
+                    <p>3 taps on a tag -> Break the tag (you can break three tags per day)</p>
+                </div>
+            </div>
+        </div> 
+    </div>
 
     <!--Fer que cascader no necessiti per força id-->
     <section id="projectlist" class="projectlist">
@@ -60,6 +75,11 @@
             <h1 slot="title">meshview</h1>
             <p slot="description">3D visor with tools</p>
             <a target="_blank" href="https://github.com/GerardEst/mesh" slot="link">Github</a>
+        </project-card>
+        <project-card>
+            <h1 slot="title">dragger</h1>
+            <p slot="description">dragging library for desk and mobile with collisions</p>
+            <a target="_blank" href="https://github.com/GerardEst/dragger" slot="link">Github</a>
         </project-card>
     </section>
 </body>

@@ -2,7 +2,7 @@ export const pairs = [
     // Iniciales : algoritmos, redes, bases de datos
 
     // Algorithm
-    {
+    /*{
         'parents': ['algorithm','network'],
         'child': 'http'
     },
@@ -44,6 +44,32 @@ export const pairs = [
     {
         'parents': ['http','html'],
         'child': 'website'
+    },*/
+
+    {
+        'parents': ['html','javascript'],
+        'child': 'react'
+    },
+    {
+        'parents': ['html','css'],
+        'child': 'UI'
+    },
+    {
+        'parents': ['UI','javascript'],
+        'child': 'UX'
+    },
+    {
+        'parents': ['css','javascript'],
+        'child': 'tailwind'
+    },
+    {
+        // Boring
+        'parents': ['UI','UX'],
+        'child': 'interface'
+    },
+    {
+        'parents': ['javascript','html'],
+        'child': 'react'
     },
 
 ]
